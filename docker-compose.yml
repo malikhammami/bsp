@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  microservicepayment:
+    image: ${DOCKER_REGISTRY-}microservicepayment
+    build:
+      context: .
+      dockerfile: MicroServicePayment/Dockerfile
