@@ -81,11 +81,7 @@ pipeline {
 
             }
         }
-        stage('Docker Compose') {
-            steps {
-                sh 'docker compose up -d'
-            }
-        }
+       
         stage('Email Notification') {
             steps {
                 script {
