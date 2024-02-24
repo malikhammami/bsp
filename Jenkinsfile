@@ -35,7 +35,7 @@ pipeline {
         string(name: 'CHANGE_TARGET', defaultValue: '', description: 'Git change ID for the target merge requests')
     }
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('docker_cred')
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub_credentials')
     }
     stages {
         stage('Github Auth') {
