@@ -62,9 +62,11 @@ pipeline {
 }
         stage('Test') {
             steps {
+                 dir('MicroServicePayment') {
                 sh 'dotnet test'
             }
         }
+              }
 
       stage('DockerHub login and image build') {
             steps {
