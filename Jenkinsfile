@@ -53,11 +53,13 @@ pipeline {
             }
         }
         stage('Restore and Build') {
-            steps {
-                sh 'dotnet restore'
-                sh 'dotnet build'
-            }
+    steps {
+        dir('MicroServicePayment') {
+            sh 'dotnet restore'
+            sh 'dotnet build'
         }
+    }
+}
         stage('Test') {
             steps {
                 sh 'dotnet test'
