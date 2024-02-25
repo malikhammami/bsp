@@ -68,16 +68,23 @@ pipeline {
         }
               }
 
-   stage('DockerHub login and image build') {
-    steps {
-        script {
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_credentials') {
+    stage('DockerHub login and image build') {
+            steps {
+                    script {
+                             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                           }
                 sh 'docker build -t malikhammami99/testdotnet .'
-                sh 'docker push malikhammami99/testdotnet'
+
+
             }
         }
-    }
-}
+
+        stage('Pushing Image to DockerHub') {
+            steps {
+                sh 'docker push malikhammami99/testdotnet'
+
+            }
+        }
        
         stage('Email Notification') {
             steps {
