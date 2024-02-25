@@ -11,7 +11,10 @@ WORKDIR /src
 COPY ["MicroServicePayment/MicroServicePayment.csproj", "MicroServicePayment/"]
 
 # Restore NuGet packages
-RUN dotnet restore "MicroServicePayment/MicroServicePayment.csproj" --source https://api.nuget.org/v3/index.json
+# Add additional diagnostic output for troubleshooting
+RUN dotnet restore "MicroServicePayment/MicroServicePayment.csproj" --source https://api.nuget.org/v3/index.json \
+    && echo "NuGet configuration:" \
+    && cat /root/.nuget/NuGet/NuGet.Config
 
 # Copy the rest of the source code
 COPY . .
