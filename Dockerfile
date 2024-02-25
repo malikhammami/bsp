@@ -1,4 +1,3 @@
-
 # Use the ASP.NET base image for the runtime environment
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
@@ -8,13 +7,19 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 
-# Copy the project file and restore NuGet packages
+# Copy the project file to the working directory
 COPY ["MicroServicePayment/MicroServicePayment.csproj", "MicroServicePayment/"]
+
+# Restore NuGet packages
 RUN dotnet restore "MicroServicePayment/MicroServicePayment.csproj" --source https://api.nuget.org/v3/index.json
 
-# Copy the rest of the source code and build the application
+# Copy the rest of the source code
 COPY . .
+
+# Change working directory to the project folder
 WORKDIR "/src/MicroServicePayment"
+
+# Build the application
 RUN dotnet build "MicroServicePayment.csproj" -c Release -o /app/build
 
 # Create a separate stage for publishing the application
