@@ -4,9 +4,7 @@ def notifySuccess() {
     def imageHeight = 'auto' // Set 'auto' to maintain the aspect ratio
 
     // Read the entire console log file
-    def consoleLog = readFile("${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/log")
-    def logFile = "${WORKSPACE}/console.log"
-    writeFile file: logFile, text: consoleLog
+    def consoleLog = readFile('/var/lib/jenkins/workspace/microservdotnet/console.log')
 
     emailext(
         body: """
@@ -22,10 +20,11 @@ def notifySuccess() {
         subject: "Jenkins Job - Success",
         to: 'malik.hammami1@gmail.com',
         attachLog: true,  // Attach the log file
-        attachmentsPattern: "${WORKSPACE}/*.log",  // Specify the file pattern to attach
+        attachmentsPattern: '/var/lib/jenkins/workspace/microservdotnet/console.log',  // Specify the file to attach
         mimeType: 'text/html'
     )
 }
+
 
 pipeline {
     agent any
