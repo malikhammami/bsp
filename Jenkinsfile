@@ -20,7 +20,7 @@ def notifySuccess() {
         subject: "Jenkins Job - Success",
         to: 'malik.hammami1@gmail.com',
         attachLog: true,  // Attach the log file
-        attachmentsPattern: '/var/lib/jenkins/workspace/microservdotnet/console.log',  // Specify the file to attach
+        attachmentsPattern: '*.log',  // Specify the file pattern to attach
         mimeType: 'text/html'
     )
 }
