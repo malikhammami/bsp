@@ -85,6 +85,20 @@ pipeline {
 
             }
         }
+        stage('Run Container') {
+    steps {
+        // Pull the Docker image from DockerHub
+        script {
+            sh 'docker pull malikhammami99/testdotnet'
+        }
+        
+        // Run the container
+        script {
+            sh 'docker run -d -p 8888:80 malikhammami99/testdotnet'
+        }
+    }
+}
+
        
         stage('Email Notification') {
             steps {
